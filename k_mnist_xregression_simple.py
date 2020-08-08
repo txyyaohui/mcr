@@ -17,6 +17,7 @@ V5: 2018-12-22 10:26:27
 V6: 2019-05-18 22:13:05 No need to import tf.
 V7: 2019-05-19 23:39:08 New functions
 '''
+import os
 
 import keras
 from keras.datasets import mnist
@@ -37,8 +38,15 @@ epochs = 1#2
 # input image dimensions
 img_rows, img_cols = 28, 28
 
+def mnist_load_data():
+    test_path = '/home/feng/.keras/datasets/mnist.npz'
+    if os.path.exists(test_path):
+        results = mnist.load_data(test_path)
+    else:
+        results = mnist.load_data()
+    return results
 # the data, shuffled and split between train and test sets
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+(x_train, y_train), (x_test, y_test) = mnist_load_data()
 
 if K.image_data_format() == 'channels_first':
     x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
