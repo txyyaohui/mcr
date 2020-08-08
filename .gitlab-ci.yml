@@ -1,0 +1,6 @@
+build:
+  tags:
+    - bcm
+  script:
+    - bash build.sh
+
