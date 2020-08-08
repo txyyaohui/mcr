@@ -1,4 +1,4 @@
 # mcr
-Maximal correlation regression
+Paper: Maximal correlation regression
 
 Author: Xiangxiang Xu
