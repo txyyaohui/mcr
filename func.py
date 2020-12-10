@@ -3,6 +3,15 @@ from keras import backend as K
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
+def neg_hscore(f, g):
+    """pytorch version of maximal correlation"""
+    f0 = f - torch.mean(f, 0)
+    g0 = g - torch.mean(g, 0)
+    corr = torch.mean(torch.sum(f0 * g0, 1))
+    cov_f = torch.mm(torch.t(f0), f0) / (f0.size()[0] - 1.)
+    cov_g = torch.mm(torch.t(g0), g0) / (g0.size()[0] - 1.)
+    return - corr + torch.trace(torch.mm(cov_f, cov_g)) / 2.
+
 def neg_hscore(x):
     """
     negative hscore calculation
